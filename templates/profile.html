@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мой профиль</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <nav class="navbar navbar-dark bg-primary">
+        <div class="container">
+            <span class="navbar-brand mb-0 h1">🚀 Трекер навыков</span>
+            <a href="/logout" class="btn btn-outline-light">Выйти</a>
+        </div>
+    </nav>
+
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Добавить новый навык</h5>
+                        {% if skills|length >= 5 %}
+                            <div class="alert alert-warning">
+                                Достигнут лимит в 5 навыков!
+                            </div>
+                        {% else %}
+                            <form method="POST" action="/add-skill">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" name="skill_name" placeholder="Название навыка" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Создать навык</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-8">
+                <h4>Мои навыки ({{ skills|length }}/5)</h4>
+                
+                {% if skills %}
+                    {% for skill in skills %}
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-title mb-0">{{ skill.name }}</h5>
+                                <span class="badge bg-primary">{{ skill.total_time }}</span>
+                            </div>
+                            
+                            <div class="progress mt-2">
+                                <div class="progress-bar" style="width: {{ skill.progress }}%">
+                                    {{ skill.progress | int }}%
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex justify-content-between align-items-center mt-2">
+                                <form action="/add-hours/{{ skill.id }}" method="POST" class="d-flex gap-2 align-items-center">
+                                    <div class="d-flex align-items-center">
+                                        <input type="number" name="hours" class="form-control form-control-sm" style="width: 80px" placeholder="0" min="0" value="0">
+                                        <small class="ms-1 text-muted">ч</small>
+                                    </div>
+                                    <div class="d-flex align-items-center">
+                                        <input type="number" name="minutes" class="form-control form-control-sm" style="width: 80px" placeholder="0" min="0" max="59" value="0">
+                                        <small class="ms-1 text-muted">м</small>
+                                    </div>
+                                    <button type="submit" class="btn btn-success btn-sm">+ Добавить</button>
+                                </form>
+                                
+                                <div class="dropdown">
+                                    <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                        ⋯
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li>
+                                            <form action="/edit-skill/{{ skill.id }}" method="POST" class="px-2 py-1">
+                                                <input type="text" name="new_name" class="form-control form-control-sm mb-1" value="{{ skill.name }}" required>
+                                                <button type="submit" class="btn btn-warning btn-sm w-100">✏️ Переименовать</button>
+                                            </form>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <form action="/remove-hours/{{ skill.id }}" method="POST" class="px-2 py-1">
+                                                <input type="number" name="hours" class="form-control form-control-sm mb-1" placeholder="Убрать часов" required min="1">
+                                                <button type="submit" class="btn btn-info btn-sm w-100">➖ Убрать</button>
+                                            </form>
+                                        </li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li>
+                                            <form action="/delete-skill/{{ skill.id }}" method="POST" class="px-2 py-1">
+                                                <button type="submit" class="btn btn-danger btn-sm w-100" onclick="return confirm('Удалить {{ skill.name }}?')">
+                                                    🗑️ Удалить
+                                                </button>
+                                            </form>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <a href="/skill-history/{{ skill.id }}" class="btn btn-info btn-sm mt-2">📊 История</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="alert alert-info">У вас пока нет навыков. Добавьте первый!</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+__pycache__/
+*.pyc
+venv/
+.env
+.DS_Store
+
+# Базы данных
+*.db
+*.sqlite3
+
+# Flask instance
+instance/
+
+# Python кеш
+__pycache__/
+*.pyc
+
+# Виртуальное окружение  
+venv/
+
+# Системные файлы
+.DS_Store
