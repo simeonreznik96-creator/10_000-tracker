@@ -20,3 +20,8 @@ venv/
 
 # Системные файлы
 .DS_Store
+# Kubernetes secrets
+k8s-manifests/secret.yaml
+tls.crt  
+tls.key
+k8s-manifests/postgres-service.yaml
