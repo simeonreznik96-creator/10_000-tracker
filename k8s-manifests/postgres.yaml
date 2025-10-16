@@ -27,6 +27,13 @@ spec:
           value: "skill_tracker"
         - name: POSTGRES_USER
           value: "postgres"
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "1000m"    
         ports:
         - containerPort: 5432
         volumeMounts:
