@@ -1,4 +1,4 @@
-version: '3.8'
+
 
 services:
   db:
@@ -26,10 +26,17 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    develop:
+      watch:
+        - path: ./templates
+          action: sync
+          target: /app/templates
+        - path: ./requirements.txt
+          action: rebuild
 
   nginx:
     build:
-      context: ./docker/nginx
+      context: ./docker/nginx_dev
       dockerfile: Dockerfile
     ports:
       - "80:80"

@@ -25,7 +25,7 @@
 
         .card {
             background: rgba(255, 255, 255, 0.5); /* ← прозрачнее */
-            backdrop-filter: blur(5px); /* ← лёгкое размытие  */
+            backdrop-filter: blur(10px); /* ← лёгкое размытие  */
             
         }
 
@@ -59,25 +59,13 @@
                             <div class="mb-3">
                                 <label class="form-label">Логин:</label>
                                 <input type="text" name="username" class="form-control validator" required 
-                                    placeholder="Username" 
-                                    pattern="[A-Za-z][A-Za-z0-9\-]*" minlength="3" maxlength="30" 
-                                    title="Only letters, numbers or dash">
-                                <p class="validator-hint">
-                                    Must be 3 to 30 characters
-                                    <br/>containing only letters, numbers or dash
+                                    placeholder="Username">
                                 </p>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Пароль:</label>
                                 <input type="password" name="password" class="form-control validator" required 
-                                    placeholder="Пароль" minlength="8" 
-                                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
-                                    title="Must be more than 8 characters, including number, lowercase letter, uppercase letter">
-                                <p class="validator-hint">
-                                    Must be more than 8 characters, including
-                                    <br/>At least one number
-                                    <br/>At least one lowercase letter
-                                    <br/>At least one uppercase letter
+                                    placeholder="Пароль">
                                 </p>
                             </div>
                             <button type="submit" class="btn btn-primary w-100">Войти</button>
