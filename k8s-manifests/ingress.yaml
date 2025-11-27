@@ -6,6 +6,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: traefik  
   rules:
   - host: 141-105-64-177.sslip.io
     http:

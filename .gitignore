@@ -24,4 +24,3 @@ venv/
 k8s-manifests/secret.yaml
 tls.crt  
 tls.key
-k8s-manifests/postgres-service.yaml
