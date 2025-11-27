@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: simon6620/skill-tracker:1.0.0  
+        image: simon6620/skill-tracker:1.1.0  
         env:
         - name: DB_HOST
           value: "postgres"
