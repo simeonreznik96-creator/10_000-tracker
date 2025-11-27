@@ -5,13 +5,7 @@ metadata:
   namespace: skill-tracker
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
-    cert-manager.io/cluster-issuer: letsencrypt-prod
-    nginx.ingress.kubernetes.io/ssl-redirect: "true"
 spec:
-  tls:
-  - hosts:
-    - 141-105-64-177.sslip.io
-    secretName: app-tls-cert
   rules:
   - host: 141-105-64-177.sslip.io
     http:
