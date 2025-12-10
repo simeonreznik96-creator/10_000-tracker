@@ -5,16 +5,21 @@ metadata:
   namespace: skill-tracker
   annotations:
     nginx.ingress.kubernetes.io/rewrite-target: /
+    traefik.ingress.kubernetes.io/router.middlewares: default-redirect-https@kubernetescrd
 spec:
-  ingressClassName: traefik  
+  ingressClassName: traefik                
+  tls:                                     
+  - hosts:
+    - skilltracker.online                  
+    secretName: skilltracker-tls           
   rules:
-  - host: 141-105-64-177.sslip.io
+  - host: skilltracker.online
     http:
       paths:
       - path: /
         pathType: Prefix
         backend:
           service:
-            name: nginx
+            name: nginx                     
             port:
-              number: 80
+              number: 80  

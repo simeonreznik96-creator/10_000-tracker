@@ -18,13 +18,20 @@ spec:
         image: simon6620/skill-tracker:1.1.0  
         env:
         - name: DB_HOST
-          value: "postgres"
-        - name: DB_PORT  
-          value: "5432"
-        - name: DB_NAME
-          value: "skill_tracker"
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: postgres-host
         - name: DB_USER
-          value: "postgres"
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: postgres-user
+        - name: DB_NAME
+          valueFrom:
+            secretKeyRef:
+              name: app-secrets
+              key: postgres-db
         - name: DB_PASSWORD
           valueFrom:
             secretKeyRef:
@@ -35,6 +42,8 @@ spec:
             secretKeyRef:
               name: app-secrets
               key: secret-key
+        - name: DB_PORT
+          value: "5432"
         ports:
         - containerPort: 5001
 ---
