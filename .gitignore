@@ -24,3 +24,4 @@ venv/
 k8s-manifests/secret.yaml
 tls.crt  
 tls.key
+.vscode/

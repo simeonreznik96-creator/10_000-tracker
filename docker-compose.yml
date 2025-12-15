@@ -1,4 +1,4 @@
-
+version: '3.8'
 
 services:
   db:
@@ -33,13 +33,17 @@ services:
           target: /app/templates
         - path: ./requirements.txt
           action: rebuild
+    volumes:
+      - ./static:/app/static 
 
   nginx:
     build:
-      context: ./docker/nginx_dev
+      context: ./docker/nginx  
       dockerfile: Dockerfile
     ports:
       - "80:80"
+    volumes:
+      - ./static:/var/www/static  
     depends_on:
       - app
 
